@@ -1,4 +1,5 @@
 const PORT = process.env.PORT || 3000;
+const express = require('express');
 const app = express();
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -32,7 +33,6 @@ process.on('SIGTERM', () => {
 });
 
 require('dotenv').config();
-const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
