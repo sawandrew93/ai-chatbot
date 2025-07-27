@@ -4,7 +4,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 // Update CORS for production
 app.use(cors({
   origin: NODE_ENV === 'production' 
-    ? ['https://yourdomain.com', 'wss://yourdomain.com'] 
+    ? ['https://preview.vanguardmm.com', 'wss://preview.vanguardmm.com'] 
     : true,
   credentials: true
 }));
