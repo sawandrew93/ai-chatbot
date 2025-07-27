@@ -1,4 +1,5 @@
 const PORT = process.env.PORT || 3000;
+const app = express();
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Update CORS for production
