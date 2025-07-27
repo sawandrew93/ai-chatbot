@@ -1,38 +1,5 @@
-const PORT = process.env.PORT || 3000;
-const express = require('express');
-const app = express();
-const NODE_ENV = process.env.NODE_ENV || 'development';
-
-// Update CORS for production
-app.use(cors({
-  origin: NODE_ENV === 'production' 
-    ? ['https://preview.vanguardmm.com', 'wss://preview.vanguardmm.com'] 
-    : true,
-  credentials: true
-}));
-
-// Add health check for load balancer
-app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    agents: humanAgents.size, 
-    queue: waitingQueue.length,
-    conversations: conversations.size
-  });
-});
-
-// Add graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
-    process.exit(0);
-  });
-});
-
 require('dotenv').config();
+const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -41,6 +8,7 @@ const WebSocket = require('ws');
 const http = require('http');
 const path = require('path');
 
+const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
